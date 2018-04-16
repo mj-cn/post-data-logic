@@ -1,0 +1,21 @@
+{
+  "name": "posts-escuelita",
+  "version": "1.0.0",
+  "description": "Node module to create escuelita's posts.",
+  "main": "lib/index.js",
+  "types": "lib/index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joaquin Noe <joako.n96@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.0.13",
+    "winston": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.0.9",
+    "@types/mongoose": "^5.0.8",
+    "@types/winston": "^2.3.9"
+  }
+}

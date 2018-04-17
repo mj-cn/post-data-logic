@@ -1,7 +1,12 @@
 import {IPost, Post} from "../models";
+import {DocumentQuery} from "mongoose";
 
 export interface IPostService {
-
+    getById: (id: string) => Promise<IPost>
+    create: (post: IPost) => Promise<IPost>
+    update: (post: IPost, id: number) => DocumentQuery<IPost | null, IPost>
+    read: () => DocumentQuery<IPost[] | null, IPost>
+    delete: (id: number) => DocumentQuery<IPost | null, IPost>
 }
 
 const ERR_NODATA = 'no posts were found with the criteria applied';

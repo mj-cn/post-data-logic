@@ -1,12 +1,13 @@
-import {IPost, Post} from "../models";
+import {IPost, IPostModel, Post} from "../models";
 import {DocumentQuery} from "mongoose";
 
-export interface IPostService {
-    getById: (id: string) => Promise<IPost>
-    create: (post: IPost) => Promise<IPost>
-    update: (post: IPost, id: number) => DocumentQuery<IPost | null, IPost>
-    read: () => DocumentQuery<IPost[] | null, IPost>
-    delete: (id: number) => DocumentQuery<IPost | null, IPost>
+export interface IPostAPI {
+    getById: (id: string) => Promise<IPostModel>
+    create: (post: IPost) => Promise<IPostModel>
+    update: (post: IPost, id: string) => DocumentQuery<IPostModel | null, IPostModel>
+    read: () => DocumentQuery<IPostModel[] | null, IPostModel>
+    delete: (id: string) => DocumentQuery<IPostModel | null, IPostModel>
+    getByCategory: (category: string) => Promise<IPostModel[] | null>
 }
 
 const ERR_NODATA = 'no posts were found with the criteria applied';
@@ -15,9 +16,10 @@ const ERR_DELETE = 'we cannot delete the post';
 const ERR_UPDATE = 'we cannot update the post';
 const ERR_INVALIDPOST = 'Invalid post';
 const ERR_NOID = 'undefined parameter ID';
+const ERR_NOCAT = 'undefined categort';
 const ERR_NOREPO = 'undefined repository';
 
-export function PostService(): IPostService {
+export function PostAPI(): IPostAPI {
 
     return {
         getById: (id: string) => {
@@ -29,6 +31,13 @@ export function PostService(): IPostService {
                 return res;
             });
         },
+        getByCategory: (category: string) => {
+            if (!category)
+                throw new Error(ERR_NOCAT);
+            return Post.find({'detalle.categoria': category}).then(res => {
+                return res;
+            });
+        },
         create: (post: IPost) => {
             if (!post)
                 throw new Error(ERR_INVALIDPOST);
@@ -36,7 +45,7 @@ export function PostService(): IPostService {
             return newPost.save();
 
         },
-        update: (post: IPost, id: number) => {
+        update: (post: IPost, id: string) => {
             if (!id)
                 throw new Error(ERR_NOID);
             if (!post)
@@ -46,7 +55,7 @@ export function PostService(): IPostService {
         read: () => {
             return Post.find();
         },
-        delete: (id: number) => {
+        delete: (id: string) => {
             if (!id)
                 throw new Error(ERR_NOID);
             return Post.findByIdAndRemove(id);

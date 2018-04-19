@@ -1,3 +1,3 @@
 export {IPost} from "./models/";
-export {IPostService, PostService} from "./data-logic/post";
+export {IPostAPI, PostAPI} from "./data-logic/post";
 

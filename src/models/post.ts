@@ -1,6 +1,6 @@
 import { mongoose } from "../database";
 
-export interface IPost extends mongoose.Document{
+export interface IPost {
     urlImage?: string;
     dateString?: string;
     detalle: {
@@ -11,7 +11,7 @@ export interface IPost extends mongoose.Document{
     };
 }
 
-export interface IPostModel extends mongoose.Model<IPost> {}
+export interface IPostModel extends IPost, mongoose.Document{}
 
 const schema = new mongoose.Schema({
     urlImage: String,
@@ -24,4 +24,4 @@ const schema = new mongoose.Schema({
     }
 });
 
-export const Post = mongoose.model<IPost>("Post", schema) as IPostModel;
+export const Post = mongoose.model<IPostModel>("Post", schema);

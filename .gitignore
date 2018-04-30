@@ -1,0 +1,7 @@
+# Ignore node modules
+node_modules/
+# Javascript code from typescript 
+lib
+
+# VsCode env conf
+.vscode

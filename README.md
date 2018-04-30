@@ -1,4 +1,4 @@
-# Post Escuelita data layer
+# PostModel Escuelita data layer
 
 This Node.js module represents the data layer of escuelita posts app.
 The module uses  MongoDB.
@@ -20,8 +20,8 @@ const postAPI = PostAPI();
 var post: IPost = {  
     detalle: {  
         title: 'A Title',  
-        categoria: 'Post Category',  
-        descripcion: 'Post description',  
+        categoria: 'PostModel Category',  
+        descripcion: 'PostModel description',  
         linkPost: 'http://www.elpost.com/1'  
   },  
     urlImage: 'http://www.instagram.com/mgasd/1.png',  
